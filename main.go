@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,8 +11,6 @@ import (
 )
 
 func main() {
-	fmt.Println("hello world")
-
 	godotenv.Load(".env")
 	portString := os.Getenv("PORT")
 
@@ -34,6 +31,7 @@ func main() {
 
 	v1Router := chi.NewRouter()
 	v1Router.Get("/healthz", handlerReadiness)
+	v1Router.Get("/err", handlerErr)
 
 	router.Mount("/v1", v1Router)
 
